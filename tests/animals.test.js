@@ -57,4 +57,18 @@ describe('Petshop API', () => {
     expect(res.statusCode).to.equal(200);
     expect(res.body).to.be.an('array');
   });
+
+  it('cadastro inválido', async () => {
+    const res = await request(app)
+      .post('/api/animals')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        especie: 'Cachorro',
+        raca: 'Labrador',
+        idade: 5,
+        dono: 'Chiara'
+      });
+
+    expect(res.statusCode).to.equal(400);
+  });
 });
